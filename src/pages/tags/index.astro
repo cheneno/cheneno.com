@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+const allPosts = await getCollection('posts')
+const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))]
+const pageTitle = 'Tag Index'
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <ul>
+        {tags.map(tag => (
+            <li><a href={`/tags/${tag}`}>{tag}</a></li>
+        ))}
+    </ul>
+</BaseLayout>

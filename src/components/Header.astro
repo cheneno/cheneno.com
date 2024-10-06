@@ -1,7 +1,42 @@
 ---
-import Nav from './Nav.astro'
+import { MENU } from 'config'
+import MenuToggle from './MenuToggle.astro'
+import ThemeToggle from './ThemeToggle.astro'
 ---
 
 <header>
-    <Nav />
+    <nav class="flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="/" class="flex items-center">
+            Chen Eno
+        </a>
+
+        <div class="flex items-center space-x-2 md:order-2">
+            <ThemeToggle />
+            <MenuToggle />
+        </div>
+
+        <div id="navLinks" class="w-full hidden items-center font-300 text-lg md:flex md:w-auto md:order-1">
+            {MENU.map(item => {
+                return <a class="link" href={item.url}>{item.name}</a>
+            })}
+        </div>
+    </nav>
 </header>
+
+<style>
+.link {
+    --uno: "block text-center py-2 px-0 decoration-none hover:bg-base-hover md:inline-block md:py-15px md:px-20px md:hover:bg-base md:hover:text-base-hover";
+}
+
+.expanded {
+    display: unset;
+}
+</style>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        document.querySelector("#menuToggle")?.addEventListener('click', () => {
+            document.querySelector("#navLinks")?.classList.toggle('expanded')
+        })
+    })
+</script>

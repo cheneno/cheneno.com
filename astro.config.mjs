@@ -4,6 +4,8 @@ import UnoCSS from 'unocss/astro'
 
 import { SITE } from './site.config'
 
+import mdx from '@astrojs/mdx'
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
@@ -11,5 +13,6 @@ export default defineConfig({
     UnoCSS({
       injectReset: true, // or a path to the reset file
     }),
+    mdx(),
   ],
 })

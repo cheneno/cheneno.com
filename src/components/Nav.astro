@@ -1,0 +1,31 @@
+---
+import { MENU } from 'config'
+import MenuToggle from './MenuToggle.astro'
+import ThemeToggle from './ThemeToggle.astro'
+---
+
+<nav>
+    <MenuToggle />
+    <ThemeToggle />
+    <div id="navLinks" class="w-full top-20 left-48px m-0 hidden md:ml-5em md:block md:static md:w-auto md:b-none">
+        {MENU.map(item => {
+            return <a class="link" href={item.url}>{item.name}</a>
+        })}
+    </div>
+</nav>
+
+<style>
+.link {
+    --uno: "block text-center py-2 px-0 decoration-none text-xl font-bold hover:bg-base-hover md:inline-block md:py-15px md:px-20px md:hover:bg-base md:hover:text-base-hover";
+}
+
+.expanded {
+    display: unset;
+}
+</style>
+
+<script>
+    document.querySelector("#menuToggle")?.addEventListener('click', () => {
+        document.querySelector("#navLinks")?.classList.toggle('expanded')
+    })
+</script>

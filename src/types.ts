@@ -1,3 +1,12 @@
+export interface MetaInfo {
+  title: string
+  description: string
+  keywords?: string[]
+  canonicalUrl?: string
+  image?: string
+  type?: string
+}
+
 export interface Site {
   title: string // website title
   url: string

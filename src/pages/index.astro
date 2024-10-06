@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
+import { SITE } from 'config'
 ---
 
-<BaseLayout pageTitle={"首页"}>
+<BaseLayout
+	title={SITE.title}
+	description={SITE.description}
+>
 	<h2>Home Page</h2>
 </BaseLayout>

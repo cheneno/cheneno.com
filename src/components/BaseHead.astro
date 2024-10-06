@@ -1,0 +1,57 @@
+---
+import type { MetaInfo } from '@types'
+import { SITE } from 'config'
+
+type Props = MetaInfo
+
+const {
+  title,
+  description = SITE.description,
+  keywords = [],
+  canonicalUrl = Astro.url.href,
+  image,
+  type,
+} = Astro.props
+
+let card = 'summary_large_image'
+if (!image) {
+  card = 'summary'
+}
+---
+
+<!-- Global -->
+<title>{title} | ${SITE.title}</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(",").toLowerCase()} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content={type && "article"} />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content={title} />
+<meta property="og:site_name" content={SITE.title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={image} />
+<meta content="1200" property="og:image:width" />
+<meta content="600" property="og:image:height" />
+<meta content="image/png" property="og:image:type" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content={card} />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:domain" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={image} />
+
+<!-- Links -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${SITE.url}rss.xml`} />

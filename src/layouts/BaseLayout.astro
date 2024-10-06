@@ -4,17 +4,17 @@ import Footer from '../components/Footer.astro'
 
 import '@styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
+import BaseHead from '@components/BaseHead.astro'
+import type { MetaInfo } from '@types'
 
-const { pageTitle } = Astro.props
+type Props = MetaInfo
+
+const { ...meta } = Astro.props
 ---
 
 <html lang="zh-cn">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <BaseHead {...meta} />
     <ViewTransitions />
   </head>
   <body class="bg-base text-base">

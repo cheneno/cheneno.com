@@ -6,7 +6,10 @@ const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))]
 const pageTitle = 'Tag Index'
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout 
+    title="Tags"
+    description='All Tags'
+>
     <ul>
         {tags.map(tag => (
             <li><a href={`/tags/${tag}`}>{tag}</a></li>

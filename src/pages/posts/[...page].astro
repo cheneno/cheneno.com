@@ -3,7 +3,7 @@ import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { fetchPosts } from '@lib/post'
-// import PostList from '@components/PostList.astro'
+import PostList from '@components/PostList.astro'
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await fetchPosts()
@@ -24,5 +24,5 @@ const { page } = Astro.props
     title="Posts"
     description="All Posts"
 >
-    <!-- <PostList posts={page.data} /> -->
+    <PostList posts={page.data} />
 </BaseLayout>

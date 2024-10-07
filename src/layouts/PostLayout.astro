@@ -12,12 +12,12 @@ const { headings } = await post.render()
 
 <BaseLayout
     title={post.data.title}
-    description={post.data.summary || ""},
+    description={post.data.excerpt || ""},
     image={`${import.meta.env.SITE}/posts/${post.slug}/og.png`}
     canonicalUrl={`${import.meta.env.SITE}/posts/${post.slug}/`}
     type='article'
 >
-    <article class="prose">
+    <article class="prose max-w-100%">
         <slot />
     </article>
 </BaseLayout>

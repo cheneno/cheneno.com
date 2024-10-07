@@ -2,9 +2,12 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 
 export const fetchPosts = async () => {
   // if PROD, filter draft post
-  const posts = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true
-  })
+  const posts: CollectionEntry<'posts'>[] = await getCollection(
+    'posts',
+    ({ data }: CollectionEntry<'posts'>) => {
+      return import.meta.env.PROD ? data.draft !== true : true
+    },
+  )
 
   // sort by updatedAt or createdAt
   return posts.sort((a, b) => {

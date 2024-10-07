@@ -10,13 +10,18 @@ export interface MetaInfo {
 export interface Site {
   title: string // website title
   url: string
-  author: string
   description: string // website description info
+  author: AuthorInfo
   tagline?: string // website tagline
   logo?: Logo // website logo image
   favicon?: string
   social?: Link[] // social media accounts
   friends?: Friend[]
+}
+
+interface AuthorInfo {
+  name: string
+  avatar: string
 }
 
 interface Logo {

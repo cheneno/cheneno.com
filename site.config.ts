@@ -3,7 +3,10 @@ import type { Site, Link } from '@types'
 const SITE: Site = {
   title: 'EnoLab',
   url: 'https://cheneno.com',
-  author: 'Chen Eno',
+  author: {
+    name: 'Chen Eno',
+    avatar: '/logo.webp',
+  },
   description: "This Chen Eno's personal website",
   favicon: '/favicon.svg',
 }

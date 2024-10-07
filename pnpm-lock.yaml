@@ -23,6 +23,9 @@ importers:
       astro-expressive-code:
         specifier: ^0.37.0
         version: 0.37.0(astro@4.15.11(rollup@4.24.0)(typescript@5.6.2))
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -30,6 +33,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.3
         version: 1.9.3
+      '@iconify-json/carbon':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/line-md':
         specifier: ^1.2.1
         version: 1.2.1
@@ -568,6 +574,9 @@ packages:
 
   '@expressive-code/plugin-text-markers@0.37.0':
     resolution: {integrity: sha512-iDwB7iYga7hIyODR0wGVP2yo10H3Ncknif2diZvc/w9Mb/RvStEtCXRoqs3jgQlS3dhTGBXzTorFZx36vNy4rQ==}
+
+  '@iconify-json/carbon@1.2.1':
+    resolution: {integrity: sha512-dIMY6OOY9LnwR3kOqAtfz4phGFG+KNfESEwSL6muCprBelSlSPpRXtdqvEEO/qWhkf5AJ9hWrOV3Egi5Z2IuKA==}
 
   '@iconify-json/line-md@1.2.1':
     resolution: {integrity: sha512-XMga2q5PiQ2LrU7K06hfqSYOA+7UFhRwhl52xvPCPAiLmtdfWBeX38nA46mcaLj7sdNo+DK+BJy9iTrzQ0ewNw==}
@@ -1233,6 +1242,9 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
@@ -3048,6 +3060,10 @@ snapshots:
     dependencies:
       '@expressive-code/core': 0.37.0
 
+  '@iconify-json/carbon@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/line-md@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -3820,6 +3836,8 @@ snapshots:
       source-map-js: 1.2.1
 
   cssesc@3.0.0: {}
+
+  dayjs@1.11.13: {}
 
   debug@4.3.7:
     dependencies:

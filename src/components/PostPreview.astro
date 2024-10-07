@@ -1,0 +1,52 @@
+---
+import { formatDate } from '@lib/date'
+import type { CollectionEntry } from 'astro:content'
+import { SITE } from 'config'
+
+interface Props {
+  post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props
+---
+
+<article class="py-8 border-b border-b-solid border-b-[#8796a513] flex flex-row">
+    <div class="flex flex-col flex-grow">
+        <div class="flex-auto">
+            <h2><a href={`/posts/${post.slug}`}>{post.data.title}</a></h2>
+            <div class="text-content mt-4 text-sm overflow-hidden line-clamp-3">
+                {post.data.excerpt}
+            </div>
+        </div>
+        <div class="flex flex-row items-center text-xs mt-3 text-content">
+            <div>
+                {SITE.author.name}
+            </div>
+            <i class="px-3 text-[#f1404b]">•</i>
+            <span>
+                <a href={`/categories/${post.data.category}`}>{post.data.category}</a>
+            </span>
+            <i class="px-3 text-[#f1404b]">•</i>
+            <time datetime={post.data.createdAt.toString()}>{formatDate(post.data.createdAt)}</time> 
+        </div>
+    </div>
+    <div class="flex-grow-0 flex-shrink-0 flex-basis-25% pl-4 max-w-25% h-auto">
+        <a href={`/posts/${post.slug}`} class="overflow-hidden w-full rd-md block img-link">
+            <img src="/logo.webp" class="img" />
+        </a>
+    </div>
+</article>
+
+<style>
+.img-link {
+    box-shadow: 0px 10px 30px -10px rgb(45 55 86 / 20%);
+}
+
+.img {
+    filter: blur(0px);
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>

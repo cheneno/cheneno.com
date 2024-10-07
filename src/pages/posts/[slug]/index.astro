@@ -3,7 +3,10 @@ import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import PostLayout from '@/layouts/PostLayout.astro'
 import { fetchPosts } from '@/lib/post'
-// import { formatDate } from '@lib/date'
+import { formatDate } from '@lib/date'
+import MDLink from '@components/Markdown/MDLink.astro'
+import MDImage from '@components/Markdown/MDImage.astro'
+import { SITE } from 'config'
 
 export const getStaticPaths = (async () => {
   const posts = await fetchPosts()
@@ -24,23 +27,28 @@ const { Content, remarkPluginFrontmatter } = await post.render()
 <PostLayout post={post}>
   <div class="w-full">
     <h1 class="my-0 text-3xl font-bold mb-3">{ post.data.title }</h1>
-    <div class="flex flex-row items-center dark:text-zinc-500 text-sm mb-4 font-grotesk">
-      <>
-        <div class="i-carbon:calendar mr-1"></div>
-        <!-- { formatDate(post.data.createdAt) } -->
-        <!-- { post.data.updatedAt ? <span id="update-time" title={formatDate(post.data.updatedAt)}>(已更新)</span> : ""  } -->
-      </>
+    <div class="flex flex-row items-center gap-3 dark:text-zinc-500 text-sm mb-4 font-grotesk">
+      <div>
+        {SITE.author.name}
+      </div>
 
-      <>
-        <div class="i-carbon:time mr-1 ml-4"></div>
-        { remarkPluginFrontmatter.minutesRead }
-      </>
+      <div>
+        <div class="i-carbon:calendar"></div>
+        { formatDate(post.data.createdAt) }
+        { post.data.updatedAt ? <span id="update-time" title={formatDate(post.data.updatedAt)}>(已更新)</span> : ""  }
+      </div>
 
-      <>
-        <div class="i-carbon:category mr-1 ml-4"></div>
+      <div>
+        <div class="i-carbon:category"></div>
         <a href={`/categories/${post.data.category}`} class="decoration-none">{ post.data.category }</a>
-      </>
+      </div>
+
+      <div>
+        <div class="i-carbon:time"></div>
+        { remarkPluginFrontmatter.minutesRead }
+      </div>
+
     </div>
-    <Content />
+    <Content components={{ a: MDLink, img: MDImage }} />
   </div>
-</PostLayout
+</PostLayout>

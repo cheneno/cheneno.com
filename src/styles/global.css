@@ -1,3 +1,8 @@
+html,
+body {
+    scrollbar-gutter: stable;
+}
+
 body {
     /* font-family: "noto-serif", "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Lantinghei SC", "Microsoft Yahei", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif; */
     font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;

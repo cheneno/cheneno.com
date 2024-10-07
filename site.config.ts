@@ -13,8 +13,10 @@ const SITE: Site = {
 
 const MENU: Link[] = [
   { name: '博客', url: '/posts' },
-  { name: '专题', url: '/series' },
-  { name: '朋友', url: '/friends' },
+  { name: '分类', url: '/categories' },
+  { name: '标签', url: '/tags' },
+  // { name: '专题', url: '/series' },
+  // { name: '朋友', url: '/friends' },
 ]
 
 export { SITE, MENU }

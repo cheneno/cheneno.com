@@ -14,7 +14,7 @@ export default defineConfig({
       'switch-animation': 'transition duration-300',
       'bg-header': 'bg-[#ffffff] dark:bg-[#2a2a2b] switch-animation',
       'text-header': 'text-[#222831] dark:text-[#a0a0a0] switch-animation',
-      'text-content': 'text-[#7a8b9a] switch-animation',
+      'text-content': 'text-[#6a6b6a] dark:text-[#aaaaaa] switch-animation',
       'bg-base': 'bg-[#ffffff] dark:bg-[#1e1e1e] switch-animation',
       'bg-base-hover': 'bg-[#e0e0e0] dark:bg-[#30303a] switch-animation',
       'card-base': 'bg-[#ffffff] dark:bg-[#10101a] switch-animation',

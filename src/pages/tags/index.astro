@@ -1,18 +1,32 @@
 ---
-import { getCollection } from 'astro:content'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-const allPosts = await getCollection('posts')
-const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))]
-const pageTitle = 'Tag Index'
+import { fetchTags } from '@/lib/post'
+import PageHeader from '@components/PageHeader.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+const allTags = Array.from(await fetchTags())
 ---
 
-<BaseLayout 
-    title="Tags"
-    description='All Tags'
->
-    <ul>
-        {tags.map(tag => (
-            <li><a href={`/tags/${tag}`}>{tag}</a></li>
-        ))}
-    </ul>
+<BaseLayout title='tags' description='all tags'>
+    <PageHeader slot="page-header"  title={"标签"} description={""} />
+
+    <div>
+    {allTags.length === 0 && <p>No tags yet.</p>}
+
+    {
+        allTags.length > 0 && (
+            <div>
+            {allTags.map(([tag, val]) => (
+                    <a
+                        data-astro-prefetch
+                        href={`/tags/${tag}`}
+                        title={`View posts with the tag ${tag}`}
+                        style={`font-size: ${(Math.log(val || 1) + 1) * 1}rem`}
+                        class="inline-block underline-offset-4 underline font-grotesk m-4">
+                        {tag}
+                    </a>
+            ))}
+            </div>
+        )
+    }
+    </div>
 </BaseLayout>

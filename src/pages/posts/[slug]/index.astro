@@ -2,10 +2,10 @@
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import PostLayout from '@/layouts/PostLayout.astro'
-import { fetchPosts } from '@/lib/post'
+import { fetchCategory, fetchPosts } from '@/lib/post'
 import { formatDate } from '@lib/date'
-import MDLink from '@components/Markdown/MDLink.astro'
-import MDImage from '@components/Markdown/MDImage.astro'
+import MDLink from '@components/markdown/MDLink.astro'
+import MDImage from '@components/markdown/MDImage.astro'
 import { SITE } from 'config'
 
 export const getStaticPaths = (async () => {
@@ -22,6 +22,11 @@ interface Props {
 
 const { post } = Astro.props
 const { Content, remarkPluginFrontmatter } = await post.render()
+
+const categoryEntry = await fetchCategory(post.data.category)
+const categoryName = categoryEntry
+  ? categoryEntry.data.title
+  : post.data.category
 ---
 
 <PostLayout post={post}>
@@ -29,6 +34,7 @@ const { Content, remarkPluginFrontmatter } = await post.render()
     <h1 class="my-0 text-3xl font-bold mb-3">{ post.data.title }</h1>
     <div class="flex flex-row items-center gap-3 dark:text-zinc-500 text-sm mb-4 font-grotesk">
       <div>
+        <div class="i-carbon:user"></div>
         {SITE.author.name}
       </div>
 
@@ -40,13 +46,13 @@ const { Content, remarkPluginFrontmatter } = await post.render()
 
       <div>
         <div class="i-carbon:category"></div>
-        <a href={`/categories/${post.data.category}`} class="decoration-none">{ post.data.category }</a>
+        <a href={`/categories/${post.data.category}`} class="decoration-none">{ categoryName }</a>
       </div>
-
+<!-- 
       <div>
         <div class="i-carbon:time"></div>
         { remarkPluginFrontmatter.minutesRead }
-      </div>
+      </div> -->
 
     </div>
     <Content components={{ a: MDLink, img: MDImage }} />

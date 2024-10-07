@@ -1,5 +1,7 @@
 ---
 import { formatDate } from '@lib/date'
+import { fetchCategory } from '@lib/post'
+import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { SITE } from 'config'
 
@@ -8,9 +10,13 @@ interface Props {
 }
 
 const { post } = Astro.props
+const categoryEntry = await fetchCategory(post.data.category)
+const categoryName = categoryEntry
+  ? categoryEntry.data.title
+  : post.data.category
 ---
 
-<article class="py-8 border-b border-b-solid border-b-[#8796a513] flex flex-row">
+<article class="post py-8 border-b border-b-solid border-b-[#8796a513] flex flex-row">
     <div class="flex flex-col flex-grow">
         <div class="flex-auto">
             <h2><a href={`/posts/${post.slug}`}>{post.data.title}</a></h2>
@@ -24,20 +30,27 @@ const { post } = Astro.props
             </div>
             <i class="px-3 text-[#f1404b]">•</i>
             <span>
-                <a href={`/categories/${post.data.category}`}>{post.data.category}</a>
+                <a href={`/categories/${post.data.category}`}>{categoryName}</a>
             </span>
             <i class="px-3 text-[#f1404b]">•</i>
             <time datetime={post.data.createdAt.toString()}>{formatDate(post.data.createdAt)}</time> 
         </div>
     </div>
     <div class="flex-grow-0 flex-shrink-0 flex-basis-25% pl-4 max-w-25% h-auto">
-        <a href={`/posts/${post.slug}`} class="overflow-hidden w-full rd-md block img-link">
-            <img src="/logo.webp" class="img" />
+        <a href={`/posts/${post.slug}`} class="overflow-hidden w-full h-full rd-md block min-h-[180px] img-link">
+            {
+                post.data.cover &&
+                <Image src={post.data.cover} alt={post.data.title} class="img" />
+            }
         </a>
     </div>
 </article>
 
 <style>
+.post:last-child {
+    border-bottom: 0;
+}
+
 .img-link {
     box-shadow: 0px 10px 30px -10px rgb(45 55 86 / 20%);
 }

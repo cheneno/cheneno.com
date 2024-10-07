@@ -23,5 +23,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-*.png
-*.mdx
+# *.png
+# *.mdx

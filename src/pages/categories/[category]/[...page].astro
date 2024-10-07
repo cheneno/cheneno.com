@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import PostPreview from '@/components/PostPreview.astro'
+import { fetchCategory, fetchCategoryMap } from '@/lib/post'
+import type { GetStaticPaths, Page } from 'astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+
+export const prerender = true
+export const getStaticPaths = (async ({ paginate }) => {
+  const categoryMap = await fetchCategoryMap()
+  const categories = Array.from(categoryMap.keys())
+
+  return categories.flatMap((category) => {
+    const filterPosts = categoryMap.get(category) || []
+
+    return paginate(filterPosts, {
+      pageSize: 10,
+      params: { category },
+    })
+  })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<CollectionEntry<'posts'>>
+}
+
+const { page } = Astro.props
+const { category } = Astro.params
+const categoryEntry = await fetchCategory(category)
+
+const title = categoryEntry ? categoryEntry.data.title : category
+const description = categoryEntry ? categoryEntry.data.description : category
+---
+
+<BaseLayout title={`Category: ${title}`} description={description}>
+    <PageHeader slot="page-header"  title={title} description={description} />
+
+    <section>
+        <ul class="flex flex-col gap-y-3 text-start">
+            {
+                page.data.map((p) => (
+                    <PostPreview post={p} />
+                ))
+            }
+        </ul>
+    </section>
+</Layout>

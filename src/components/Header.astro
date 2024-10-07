@@ -1,13 +1,13 @@
 ---
-import { MENU } from 'config'
+import { MENU, SITE } from 'config'
 import MenuToggle from './MenuToggle.astro'
 import ThemeToggle from './ThemeToggle.astro'
 ---
 
 <header id="header" class="bg-header text-header">
-    <nav class="w-full max-w-[855px] font-500 tracking-wider h-28 flex flex-wrap text-size-base items-center justify-between mx-auto px-4">
+    <nav class="w-full max-w-[855px] font-500 tracking-wider flex flex-wrap text-size-base items-center justify-between mx-auto px-4 py-5 md:py-8">
         <a href="/" class="flex items-center">
-            Chen Eno
+            {SITE.title}
         </a>
 
         <div class="flex items-center space-x-2 md:order-2 text-lg">
@@ -15,7 +15,7 @@ import ThemeToggle from './ThemeToggle.astro'
             <MenuToggle />
         </div>
 
-        <div id="navLinks" class="w-full hidden items-center md:flex md:w-auto md:order-1">
+        <div id="navLinks" class="w-full hidden items-center mt-4 md:mt-0 md:flex md:w-auto md:order-1 text-header bg-header">
             {MENU.map(item => {
                 return <a class="link" href={item.url}>{item.name}</a>
             })}
@@ -29,18 +29,35 @@ import ThemeToggle from './ThemeToggle.astro'
 }
 
 .link {
-    --uno: "block text-center py-2 px-0 decoration-none hover:bg-base-hover md:inline-block md:py-15px md:px-20px md:hover:bg-base md:hover:text-base-hover";
+    --uno: "block text-center py-3 px-0 decoration-none hover:bg-base-hover md:inline-block md:px-20px md:hover:bg-header md:hover:text-base-hover";
 }
 
 .expanded {
     display: unset;
 }
+
+.selected-link {
+    text-decoration-color: #588ef3;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-skip:initial;
+}
 </style>
 
 <script>
     document.addEventListener("astro:page-load", () => {
+        const pathname = window.location.pathname.split("/").splice(0, 2).join("/")
+        console.log(pathname)
+        
+
         document.querySelector("#menuToggle")?.addEventListener('click', () => {
             document.querySelector("#navLinks")?.classList.toggle('expanded')
         })
+
+
+        const currentLink = document.querySelector(`a[href="${pathname}"]`)
+        if (currentLink) {
+            currentLink.classList.add("selected-link")
+        }
     })
 </script>

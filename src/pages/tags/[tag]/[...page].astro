@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import PostPreview from '@/components/PostPreview.astro'
+import { fetchPosts, fetchTags } from '@/lib/post'
+import type { GetStaticPaths, Page } from 'astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+
+export const prerender = true
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await fetchPosts()
+  const tags = Array.from((await fetchTags()).keys())
+
+  return tags.flatMap((tag) => {
+    const filterPosts = posts.filter((post) => {
+      if (post.data.tags) {
+        return post.data.tags.includes(tag)
+      }
+      return false
+    })
+
+    return paginate(filterPosts, {
+      pageSize: 10,
+      params: { tag },
+    })
+  })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<CollectionEntry<'posts'>>
+}
+
+const { page } = Astro.props
+const { tag } = Astro.params
+---
+
+<BaseLayout title={`Tag: ${tag}`} description={`View all posts with the tag - ${tag}`}>
+    <PageHeader slot="page-header"  title={tag} description="" />
+
+    <div>
+      <section>
+            {
+                page.data.map((p) => (
+                    <PostPreview post={p} />
+                ))
+            }
+      </section>
+    </div>
+</Layout>

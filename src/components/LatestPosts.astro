@@ -1,0 +1,16 @@
+---
+import { fetchPosts } from '@lib/post'
+import PostPreview from './PostPreview.astro'
+
+const posts = await fetchPosts()
+const recent_posts = posts.slice(0, 5)
+---
+
+<section>
+    <h2 class="my-0 mb-5 text-2xl"><a href={`/posts`}>近期博客<div class="i-carbon:chevron-right"></div></a></h2>
+    <div class="post-list">
+      {recent_posts.map((post) => (
+        <PostPreview post={post} />
+      ))}
+    </div>
+</section>

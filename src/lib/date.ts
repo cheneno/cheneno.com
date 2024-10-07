@@ -9,3 +9,8 @@ export function formatDate(d: string | Date) {
   const date = dayjs(d)
   return date.format('YYYY-MM-DD')
 }
+
+export function formatReleativeDate(d: string | Date) {
+  const date = dayjs(d)
+  return date.fromNow()
+}

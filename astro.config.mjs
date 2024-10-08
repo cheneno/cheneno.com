@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config'
+import { defineConfig, passthroughImageService } from 'astro/config'
 import UnoCSS from 'unocss/astro'
 import mdx from '@astrojs/mdx'
 import expressiveCode from 'astro-expressive-code'
@@ -23,4 +23,7 @@ export default defineConfig({
     }),
     mdx(),
   ],
+  image: {
+    service: passthroughImageService(),
+  },
 })

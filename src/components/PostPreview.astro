@@ -28,16 +28,16 @@ const categoryName = categoryEntry
             <div>
                 {SITE.author.name}
             </div>
-            <i class="px-3 text-[#f1404b]">•</i>
+            <i class="px-3">•</i>
             <span>
                 <a href={`/categories/${post.data.category}`}>{categoryName}</a>
             </span>
-            <i class="px-3 text-[#f1404b]">•</i>
+            <i class="px-3">•</i>
             <time datetime={post.data.createdAt.toString()}>{formatDate(post.data.createdAt)}</time> 
         </div>
     </div>
     <div class="flex-grow-0 flex-shrink-0 flex-basis-25% pl-4 max-w-25% h-auto">
-        <a href={`/posts/${post.slug}`} class="overflow-hidden w-full h-full rd-md block min-h-[180px] img-link">
+        <a href={`/posts/${post.slug}`} class="overflow-hidden w-full h-full rd-md block img-link">
             {
                 post.data.cover &&
                 <Image src={post.data.cover} alt={post.data.title} class="img" />
@@ -61,5 +61,9 @@ const categoryName = categoryEntry
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    aspect-ratio: 1 / 1;
 }
 </style>

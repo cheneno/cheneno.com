@@ -34,22 +34,25 @@ const categoryName = categoryEntry
     <h1 class="my-0 text-3xl font-bold mb-3">{ post.data.title }</h1>
     <div class="flex flex-row items-center gap-3 text-zinc-500 dark:text-zinc-400 text-sm mb-4">
       <div>
-        <div class="i-carbon:user"></div>
         {SITE.author.name}
       </div>
-
+      <i class="px-2">•</i>
       <div>
-        <div class="i-carbon:calendar"></div>
+        <a href={`/categories/${post.data.category}`} class="decoration-none">{ categoryName }</a>
+      </div>
+      <i class="px-2">•</i>
+      <div>
         { formatDate(post.data.createdAt) }
         { post.data.updatedAt ? <span id="update-time" title={formatDate(post.data.updatedAt)}>(已更新)</span> : ""  }
       </div>
 
-      <div>
-        <div class="i-carbon:category"></div>
-        <a href={`/categories/${post.data.category}`} class="decoration-none">{ categoryName }</a>
-      </div>
-
     </div>
     <Content components={{ a: MDLink, img: MDImage }} />
+
+    <div>
+      {post.data.tags?.map(tag => (
+        <a class="px-2 py-1 mr-2 mb-2 font-400 decoration-none  inline-block  bg-[#f7f8fa] dark:text-[#222831] dark:bg-[#1f2937]" href={`/tags/${tag}`}>{tag}</a>
+      ))}
+    </div>
   </div>
 </PostLayout>

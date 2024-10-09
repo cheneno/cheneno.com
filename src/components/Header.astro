@@ -37,10 +37,14 @@ import ThemeToggle from './ThemeToggle.astro'
 }
 
 .selected-link {
-    text-decoration-color: #588ef3;
-    text-decoration-line: underline;
-    text-decoration-style: wavy;
-    text-decoration-skip:initial;
+    background-image: linear-gradient(
+        90deg,
+        rgba(37, 99, 235, 200) 0%,
+        rgba(147, 197, 253, 200) 100%
+    );
+    background-size: calc(100% - 40px) 4px;
+    background-position: center 32px;
+    background-repeat: no-repeat;
 }
 </style>
 

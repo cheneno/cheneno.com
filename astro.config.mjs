@@ -6,6 +6,8 @@ import expressiveCode from 'astro-expressive-code'
 
 import { SITE } from './site.config'
 
+import playformCompress from '@playform/compress'
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
@@ -22,6 +24,14 @@ export default defineConfig({
       },
     }),
     mdx(),
+    playformCompress({
+      CSS: false,
+      HTML: true,
+      Image: false,
+      JavaScript: true,
+      SVG: true,
+      Logger: 2,
+    }),
   ],
   image: {
     service: passthroughImageService(),

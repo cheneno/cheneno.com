@@ -7,6 +7,7 @@ import { formatDate } from '@lib/date'
 import { SITE } from 'config'
 import MDLink from '@components/MDLink.astro'
 import MDImage from '@components/MDImage.astro'
+import TableOfContents from '@components/TableOfContents.astro'
 
 export const getStaticPaths = (async () => {
   const posts = await fetchPosts()
@@ -21,7 +22,7 @@ interface Props {
 }
 
 const { post } = Astro.props
-const { Content } = await post.render()
+const { Content, headings } = await post.render()
 
 const categoryEntry = await fetchCategory(post.data.category)
 const categoryName = categoryEntry
@@ -32,7 +33,7 @@ const categoryName = categoryEntry
 <PostLayout post={post}>
   <div class="w-full">
     <h1 class="my-0 text-3xl font-bold mb-3">{ post.data.title }</h1>
-    <div class="flex flex-row items-center gap-3 text-zinc-500 dark:text-zinc-400 text-sm mb-4">
+    <div class="flex flex-row items-center gap-3 text-zinc-500 dark:text-zinc-400 text-sm mb-4 switch-animation">
       <div>
         {SITE.author.name}
       </div>
@@ -45,8 +46,9 @@ const categoryName = categoryEntry
         { formatDate(post.data.createdAt) }
         { post.data.updatedAt ? <span id="update-time" title={formatDate(post.data.updatedAt)}>(已更新)</span> : ""  }
       </div>
-
     </div>
+    <TableOfContents headings={headings} />
+
     <Content components={{ a: MDLink, img: MDImage }} />
 
     <div>

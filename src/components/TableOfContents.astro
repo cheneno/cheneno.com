@@ -33,7 +33,14 @@ function buildToc(headings: MarkdownHeading[]) {
 ---
 
 <nav class="toc mt-9 shadow-sm border-1 b-[#ddd] dark:b-[#444] rd-md switch-animation">
-    <ul class="pl-4 text-gray-5 dark:text-gray-4 font-300 list-none text-size-base">
+    <ul class="px-4 text-gray-5 dark:text-gray-4 font-300 list-none text-size-base">
       {toc.map((heading) => <TableOfContentsHeading {...heading} />)}
     </ul>
 </nav>
+
+<style>
+.toc {
+  --uno: "2xl:absolute 2xl:top-20 2xl:right--36 2xl:b-0 ";
+}
+
+</style>

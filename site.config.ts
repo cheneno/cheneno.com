@@ -9,6 +9,10 @@ const SITE: Site = {
   },
   description: "This Chen Eno's personal website",
   favicon: '/favicon.svg',
+  umami: {
+    url: 'https://umami.cheneno.com/getinfo',
+    websiteId: '8154c3dc-cb17-44ca-8b29-fbf958b5e946',
+  },
 }
 
 const MENU: Link[] = [

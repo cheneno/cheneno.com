@@ -17,6 +17,7 @@ export interface Site {
   favicon?: string
   social?: Link[] // social media accounts
   friends?: Friend[]
+  umami?: Umami
 }
 
 interface AuthorInfo {
@@ -46,4 +47,9 @@ interface Friend {
   bio: string
   avatar: string
   desc: string
+}
+
+interface Umami {
+  url: string
+  websiteId: string
 }

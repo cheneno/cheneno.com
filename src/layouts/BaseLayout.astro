@@ -6,6 +6,7 @@ import '@styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
 import BaseHead from '@components/BaseHead.astro'
 import type { MetaInfo } from '@types'
+import { SITE } from 'config'
 
 type Props = MetaInfo
 
@@ -24,5 +25,10 @@ const { ...meta } = Astro.props
       <slot />
       <Footer />
     </main>
+
+    { 
+      SITE.umami && 
+      <script defer src={SITE.umami.url} data-website-id={SITE.umami.websiteId}></script>
+    }
   </body>
 </html>
